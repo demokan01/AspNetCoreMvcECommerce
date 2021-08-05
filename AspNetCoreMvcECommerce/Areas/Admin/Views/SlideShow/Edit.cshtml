@@ -3,12 +3,15 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-@model AspNetCoreMvcECommerce.Models.Category
+
+@model AspNetCoreMvcECommerce.Models.SlideShow
+
+
 
 
 <section class="content-header">
     <h1>
-        Kategorileri Düzenle
+        Slide Düzenle
 
     </h1>
 
@@ -20,14 +23,16 @@
 
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">Kategori Bilgileri</h3>
+                    <h3 class="box-title">Slide Bilgileri</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form method="post" asp-area="admin" asp-controller="category" asp-action="edit">
+                <form method="post" asp-area="admin" asp-controller="slideshow" asp-action="edit" enctype="multipart/form-data">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="name">Kategori Adı</label>
-                            <input class="form-control" asp-for="Name" type="text" required="required">
+                            <label for="exampleInputFile">Photo</label>
+                            <input id="exampleInputFile" type="file" name="photo" accept="image/*">
+                            <br />
+                            <img src="~/slideshows/@Model.Name" width="120" />
                         </div>
 
                         <div class="checkbox">
@@ -39,7 +44,7 @@
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Kaydet</button>
-                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="Id"/>
                     </div>
                 </form>
             </div>
@@ -50,5 +55,4 @@
     </div>
 
 </section>
-
 

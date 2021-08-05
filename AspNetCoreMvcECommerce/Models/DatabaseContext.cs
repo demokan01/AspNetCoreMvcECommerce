@@ -21,7 +21,9 @@ namespace AspNetCoreMvcECommerce.Models
 
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        
+
+        public virtual DbSet<SlideShow> SlideShows { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>(entity =>

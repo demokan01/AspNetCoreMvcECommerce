@@ -351,21 +351,33 @@
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active treeview">
-                        <a href="#">
+                        <a href="/Admin/Dashboard/">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
-                        
+
                     </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-files-o"></i>
                             <span>Kategori Ayarları</span>
-                           
+
                         </a>
                         <ul class="treeview-menu">
                             <li><a asp-area="admin" asp-controller="category" asp-action="index"><i class="fa fa-circle-o"></i> Kategori Listesi</a></li>
                             <li><a asp-area="admin" asp-controller="category" asp-action="add"><i class="fa fa-circle-o"></i> Kategori Ekleme</a></li>
-                            
+
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>Slide Ayarları</span>
+
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a asp-area="admin" asp-controller="slideshow" asp-action="index"><i class="fa fa-circle-o"></i> Slide Listesi</a></li>
+                            <li><a asp-area="admin" asp-controller="slideshow" asp-action="add"><i class="fa fa-circle-o"></i> Slide Ekleme</a></li>
+
                         </ul>
                     </li>
                     <li>
