@@ -28,13 +28,15 @@
         </div><!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">Erişim için giriş yapmalısınız...</p>
-            <form action="../../index2.html" method="post">
+        @ViewBag.error
+
+            <form asp-area="admin" asp-controller="login" asp-action="process" method="post">
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="Kullanıcı Adı" />
+                    <input type="text" required="required" class="form-control" placeholder="Kullanıcı Adı" name="username" />
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Şifre" />
+                    <input type="password" class="form-control" placeholder="Şifre" name="password" required="required" />
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">

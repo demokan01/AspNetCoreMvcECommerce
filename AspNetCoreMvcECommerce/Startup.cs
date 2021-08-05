@@ -1,6 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿
+
+using AspNetCoreMvcECommerce.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,11 +18,30 @@ namespace AspNetCoreMvcECommerce
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        public IConfiguration configuration { get; }
+
+        public Startup(IConfiguration _configuration)
+        {
+            configuration = _configuration;
+        }
+        
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/admin/login/index";
+                    options.LogoutPath = "/admin/login/signout";
+                    options.AccessDeniedPath = "/admin/account/accessdenied";
+                });
+
+
+            services.AddSession();
             services.AddMvc();
+
+            var connection = configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<DatabaseContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +62,10 @@ namespace AspNetCoreMvcECommerce
                 }
             });
 
+            app.UseAuthentication();
+
+            app.UseSession();
+
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
@@ -46,6 +75,7 @@ namespace AspNetCoreMvcECommerce
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            
 
         }
     }

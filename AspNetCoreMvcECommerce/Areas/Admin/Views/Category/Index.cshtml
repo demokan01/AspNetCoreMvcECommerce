@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Kategori Listesi
+        
+    </h1>
+    
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Kategoriler</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                        <div class="row"><div class="col-xs-6"></div><div class="col-xs-6"></div></div><table id="example2" class="table table-bordered table-hover dataTable" aria-describedby="example2_info">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Kategori Adı</th>
+                                    <th>Status</th>
+                                    <th>Type</th>
+                                    <th>Eylem</th>
+
+                                </tr>
+                            </thead>
+
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Kategori Adı</th>
+                                    <th>Status</th>
+                                    <th>Type</th>
+                                    <th>Eylem</th>
+
+                                </tr>    
+                            </tfoot>
+                            <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                @foreach (var category in ViewBag.categories)
+                                {
+                                    <tr class="odd">
+                                        <td class="  sorting_1">@category.Id</td>
+                                        <td class=" "><b>@category.Name</b></td>
+                                        <td class=" ">@(category.Status ? "Göster":"Gizle")</td>
+                                        <td class=" ">@(category.Parent == null ? "" : @category.Parent.Name)</td>
+                                        <td class=" ">
+                                            <a asp-area="admin" asp-controller="category" asp-action="edit" asp-route-id="@category.Id">
+                                                Düzenle
+                                            </a> |
+                                            @if (category.InverseParents != null && category.InverseParents.Count == 0)
+                                            {
+                                                <a asp-area="admin" asp-controller="category" asp-action="delete" asp-route-id="@category.Id" onclick="return confirm('Emin misiniz ?')">Sil</a> <span>|</span>
+                                            }
+                                            Alt Kategori Ekle
+                                        </td>
+                                    </tr>
+                                    if (category.InverseParents != null && category.InverseParents.Count != 0)
+                                    {
+                                        foreach (var subCategory in category.InverseParents)
+                                        {
+                                            <tr class="odd">
+                                                <td class="  sorting_1">@subCategory.Id</td>
+                                                <td class=" ">&nbsp;&nbsp;&nbsp;&nbsp;@subCategory.Name</td>
+                                                <td class=" ">@(subCategory.Status ? "Göster":"Gizle")</td>
+                                                <td class=" ">@subCategory.Parent.Name</td>
+                                                <td class=" ">Düzenle | Sil</td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- /.box-body -->
+            </div>
+
+
+
+        </div>
+    </div>
+
+</section>
+
+
