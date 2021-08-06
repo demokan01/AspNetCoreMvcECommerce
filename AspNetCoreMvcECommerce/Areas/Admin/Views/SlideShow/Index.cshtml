@@ -21,7 +21,9 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Slide Adı</th>
+                                <th>Photo</th>
+                                <th>Başlık</th>
+                                <th>Açıklama</th>
                                 <th>Status</th>
                                 <th>Eylem</th>
 
@@ -30,7 +32,9 @@
                         <tfoot>
                             <tr>
                                 <th>Id</th>
-                                <th>Slide Adı</th>
+                                <th>Photo</th>
+                                <th>Başlık</th>
+                                <th>Açıklama</th>
                                 <th>Status</th>
                                 <th>Eylem</th>
 
@@ -39,21 +43,23 @@
                         <tbody>
                             @foreach (var slideshow in ViewBag.SlideShows)
                             {
-                                <tr class="odd">
-                                    <td class="  sorting_1">@slideshow.Id</td>
-                                    <td class=" "><img src="~/slideshows/@slideshow.Name" width="120" /></td>
-                                    <td class=" ">@(slideshow.Status ? "Göster":"Gizle")</td>
+                            <tr class="odd">
+                                <td>@slideshow.Id</td>
+                                <td class=" "><img src="~/slideshows/@slideshow.Name" width="120" /></td>
+                                <td>@slideshow.Title</td>
+                                <td>@slideshow.Description</td>
+                                <td class=" ">@(slideshow.Status ? "Göster":"Gizle")</td>
 
-                                    <td class=" ">
-                                        <a asp-area="admin" asp-controller="slideshow" asp-action="edit" asp-route-id="@slideshow.Id">
-                                            Düzenle
-                                        </a> |
+                                <td class=" ">
+                                    <a asp-area="admin" asp-controller="slideshow" asp-action="edit" asp-route-id="@slideshow.Id">
+                                        Düzenle
+                                    </a> |
 
-                                        <a asp-area="admin" asp-controller="slideshow" asp-action="delete" asp-route-id="@slideshow.Id" onclick="return confirm('Emin misiniz ?')">Sil</a>
+                                    <a asp-area="admin" asp-controller="slideshow" asp-action="delete" asp-route-id="@slideshow.Id" onclick="return confirm('Emin misiniz ?')">Sil</a>
 
 
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
 
                             }
                         </tbody>

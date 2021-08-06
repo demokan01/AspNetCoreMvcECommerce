@@ -90,6 +90,8 @@ namespace AspNetCoreMvcECommerce.Areas.Admin.Controllers
 
             }
             currentSlideShow.Status = slideShow.Status;
+            currentSlideShow.Title = slideShow.Title;
+            currentSlideShow.Description = slideShow.Description;
             db.SaveChanges();
             return RedirectToAction("Index", "slideshow", new { area = "admin" });
         }

@@ -31,6 +31,15 @@
                             <input id="exampleInputFile" type="file" name="photo" accept="image/*">
                         </div>
 
+                        <div class="form-group">
+                            <label for="name">Başlık</label>
+                            <input class="form-control" asp-for="Title" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label >Açıklama</label>
+                            <textarea class="form-control" rows="3" asp-for="Description"></textarea>
+                        </div>
+
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" asp-for="Status"> Status

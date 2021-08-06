@@ -34,6 +34,14 @@
                             <br />
                             <img src="~/slideshows/@Model.Name" width="120" />
                         </div>
+                        <div class="form-group">
+                            <label for="name">Başlık</label>
+                            <input class="form-control" asp-for="Title" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Açıklama</label>
+                            <textarea class="form-control" rows="3" asp-for="Description"></textarea>
+                        </div>
 
                         <div class="checkbox">
                             <label>

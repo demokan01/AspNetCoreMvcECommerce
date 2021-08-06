@@ -32,7 +32,7 @@
 /* Carousel  */
 #myCarousel{text-align:center; margin-bottom:0}
 #myCarousel .btn{position:absolute; bottom:10%; right:17%; padding:2% 6%; z-index:9999}
-#myCarousel .carousel-caption{display:none;}
+
 #myCarousel.homCar .item img{width:100%; max-height:506px}
 #productView .btn-toolbar{padding-left:3px;}
 #productDetail > li, .nav-pills > li {float: right;}
