@@ -21,6 +21,9 @@ namespace AspNetCoreMvcECommerce.Models
 
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Photo> Photos { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+
 
         public virtual DbSet<SlideShow> SlideShows { get; set; }
 
@@ -80,6 +83,26 @@ namespace AspNetCoreMvcECommerce.Models
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Role_Account_Role");
+            });
+
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.HasOne(d => d.Category)
+                .WithMany(p => p.Products)
+                .HasForeignKey(d => d.CategoryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Category_Product");
+
+            });
+
+            modelBuilder.Entity<Photo>(entity =>
+            {
+                entity.HasOne(d => d.Product)
+                .WithMany(p => p.Photos)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Product_Photo");
+
             });
         }
 

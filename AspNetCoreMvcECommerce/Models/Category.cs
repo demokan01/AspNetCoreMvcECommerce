@@ -12,6 +12,7 @@ namespace AspNetCoreMvcECommerce.Models
         public Category()
         {
             InverseParents = new HashSet<Category>();
+            Products = new HashSet<Product>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -21,5 +22,7 @@ namespace AspNetCoreMvcECommerce.Models
 
         public virtual Category Parent { get; set; }
         public virtual ICollection<Category> InverseParents { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
+
     }
 }

@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@using AspNetCoreMvcECommerce.Models
+<section class="content-header">
+    <h1>
+        Ürün Listesi
+
+    </h1>
+
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Ürünler</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div id="productListTable" class="dataTables_wrapper form-inline" role="grid">
+                        <div class="row"><div class="col-xs-6"></div><div class="col-xs-6"></div></div><table id="example2" class="table table-bordered table-hover dataTable" aria-describedby="example2_info">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Photo</th>
+                                    <th>Fiyat</th>
+                                    <th>Kategori</th>
+                                    
+                                    <th>Eylem</th>
+
+                                </tr>
+                            </thead>
+
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Photo</th>
+                                    <th>Fiyat</th>
+                                    <th>Kategori</th>
+
+                                    <th>Eylem</th>
+
+                                </tr>
+                            </tfoot>
+                            <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                @foreach (var product in ViewBag.Products)
+                                {
+                                    Product pr = (Product)product;
+                                    var photo = pr.Photos.SingleOrDefault(p => p.Featured == true);
+                                <tr class="odd">
+                                    <td class="  sorting_1">@product.Id</td>
+                                    <td class=" "><b>@product.Name</b></td>
+                                    <td class=" "><img src="~/products/@photo.Name" width="100" /></td>
+                                    <td class=" ">@product.Price</td>
+                                    <td class=" ">@(product.Status ? "Göster":"Gizle")</td>
+                                    <td class=" ">@(product.Category.Name)</td>
+                                    <td class=" ">
+                                        <a asp-area="admin" asp-controller="product" asp-action="edit" asp-route-id="@product.Id">
+                                            Düzenle
+                                        </a> |
+
+
+                                        <a asp-area="admin" asp-controller="product" asp-action="delete" asp-route-id="@product.Id" onclick="return confirm('Emin misiniz ?')">Sil</a> <span>|</span>
+
+
+                                    </td>
+                                </tr>
+                                    
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- /.box-body -->
+            </div>
+
+
+
+        </div>
+    </div>
+
+</section>
+
+<script>
+    $(function () {
+        
+        $('#productListTable').dataTable({
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": true,
+            "bAutoWidth": false
+        });
+    });
+</script>
+
