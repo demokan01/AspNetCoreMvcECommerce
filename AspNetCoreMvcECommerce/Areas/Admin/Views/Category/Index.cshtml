@@ -12,6 +12,18 @@
     
 </section>
 <section class="content">
+    @if (TempData["error"] != null)
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="alert alert-danger alert-dismissable">
+
+                    <h4><i class="icon fa fa-ban"></i> Başarısız</h4>
+                    Silme İşlemi Başarısız
+                </div>
+            </div>
+        </div>
+    }
     <div class="row">
         <div class="col-xs-12">
 
@@ -22,73 +34,73 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <table id="categoryListTable" class="table table-bordered table-hover">
-                        
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Kategori Adı</th>
-            <th>Status</th>
-            <th>Type</th>
-            <th>Eylem</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var category in ViewBag.categories)
-        {
-            <tr class="odd">
-                <td class="  sorting_1">@category.Id</td>
-                <td class=" "><b>@category.Name</b></td>
-                <td class=" ">@(category.Status ? "Göster":"Gizle")</td>
-                <td class=" ">@(category.Parent == null ? "" : @category.Parent.Name)</td>
-                <td class=" ">
-                    <a asp-area="admin" asp-controller="category" asp-action="edit" asp-route-id="@category.Id">
-                        Düzenle
-                    </a> |
-                    @if (category.InverseParents != null && category.InverseParents.Count == 0)
-                    {
-                        <a asp-area="admin" asp-controller="category" asp-action="delete" asp-route-id="@category.Id" onclick="return confirm('Emin misiniz ?')">Sil</a> <span>|</span>
-                    }
-                    <a asp-area="admin" asp-controller="category" asp-action="addsubcategory" asp-route-id="@category.Id">
-                        Alt Kategori Ekle
-                    </a>
-                </td>
-            </tr>
-            if (category.InverseParents != null && category.InverseParents.Count != 0)
-            {
-                foreach (var subCategory in category.InverseParents)
-                {
-                    <tr class="odd">
-                        <td class="  sorting_1">@subCategory.Id</td>
-                        <td class=" ">&nbsp;&nbsp;&nbsp;&nbsp;@subCategory.Name</td>
-                        <td class=" ">@(subCategory.Status ? "Göster":"Gizle")</td>
-                        <td class=" ">@subCategory.Parent.Name</td>
-                        <td class=" ">
-                            <a asp-area="admin" asp-controller="category" asp-action="edit" asp-route-id="@subCategory.Id">
-                                Düzenle
-                            </a> | <a asp-area="admin" asp-controller="category" asp-action="delete" asp-route-id="@subCategory.Id" onclick="return confirm('Emin misiniz ?')">Sil</a>
-                        </td>
-                    </tr>
-                }
-            }
-        }
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Kategori Adı</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Eylem</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var category in ViewBag.categories)
+                            {
+                                <tr class="odd">
+                                    <td class="  sorting_1">@category.Id</td>
+                                    <td class=" "><b>@category.Name</b></td>
+                                    <td class=" ">@(category.Status ? "Göster":"Gizle")</td>
+                                    <td class=" ">@(category.Parent == null ? "" : @category.Parent.Name)</td>
+                                    <td class=" ">
+                                        <a asp-area="admin" asp-controller="category" asp-action="edit" asp-route-id="@category.Id">
+                                            Düzenle
+                                        </a> |
+                                        @if (category.InverseParents != null && category.InverseParents.Count == 0)
+                                        {
+                                            <a asp-area="admin" asp-controller="category" asp-action="delete" asp-route-id="@category.Id" onclick="return confirm('Emin misiniz ?')">Sil</a> <span>|</span>
+                                        }
+                                        <a asp-area="admin" asp-controller="category" asp-action="addsubcategory" asp-route-id="@category.Id">
+                                            Alt Kategori Ekle
+                                        </a>
+                                    </td>
+                                </tr>
+                                if (category.InverseParents != null && category.InverseParents.Count != 0)
+                                {
+                                    foreach (var subCategory in category.InverseParents)
+                                    {
+                                        <tr class="odd">
+                                            <td class="  sorting_1">@subCategory.Id</td>
+                                            <td class=" ">&nbsp;&nbsp;&nbsp;&nbsp;@subCategory.Name</td>
+                                            <td class=" ">@(subCategory.Status ? "Göster":"Gizle")</td>
+                                            <td class=" ">@subCategory.Parent.Name</td>
+                                            <td class=" ">
+                                                <a asp-area="admin" asp-controller="category" asp-action="edit" asp-route-id="@subCategory.Id">
+                                                    Düzenle
+                                                </a> | <a asp-area="admin" asp-controller="category" asp-action="delete" asp-route-id="@subCategory.Id" onclick="return confirm('Emin misiniz ?')">Sil</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
 
 
-    </tbody>
-    <tfoot>
-        <tr>
-            <th>Id</th>
-            <th>Kategori Adı</th>
-            <th>Status</th>
-            <th>Type</th>
-            <th>Eylem</th>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Kategori Adı</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Eylem</th>
 
-        </tr>
-    </tfoot>
+                            </tr>
+                        </tfoot>
 
-</table>
+                    </table>
 
-                    
+
                 </div><!-- /.box-body -->
             </div>
 

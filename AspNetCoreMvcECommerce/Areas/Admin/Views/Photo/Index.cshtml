@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Ürün Resimleri @ViewBag.Product.Name
+
+    </h1>
+
+</section>
+<section class="content">
+   
+
+    <div class="row">
+        <div class="col-xs-12">
+
+
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Resimler</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div id="productListTable" class="dataTables_wrapper form-inline" role="grid">
+                        <div class="row"><div class="col-xs-6"></div><div class="col-xs-6"></div></div><table id="photoListTable" class="table table-bordered table-hover dataTable" aria-describedby="example2_info">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Photo</th>
+                                    <th>Fiyat</th>
+                                    <th>Kategori</th>
+
+                                    <th>Eylem</th>
+
+
+                                    <th>Eylem</th>
+
+                                </tr>
+                            </thead>
+
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Photo</th>
+                                    <th>Fiyat</th>
+                                    <th>Kategori</th>
+
+                                    <th>Eylem</th>
+
+                                </tr>
+                            </tfoot>
+                            <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                @foreach (var photo in ViewBag.Photos)
+                                {
+                                    
+                                <tr class="odd">
+                                    <td class="  sorting_1">@photo.Id</td>
+
+                                    <td class=" "><img src="~/products/@photo.Name" width="100" /></td>
+
+                                    <td class=" ">@(photo.Status ? "Göster":"Gizle")</td>
+                                    <td class=" ">@if (!photo.Featured)
+                                    {
+                                        <a asp-area="admin" asp-controller="photo" asp-action="SetFeatured" asp-route-id="@photo.Id" asp-route-productId="@photo.ProductId">Popülerlik Ayarla</a>
+                                    }
+                                    else
+                                    {
+                                        <span>Popülerlik</span>
+                                    }</td>
+                                    
+
+                                    <td class=" ">
+                                        <a asp-area="admin" asp-controller="photo" asp-action="edit" asp-route-id="@photo.Id" asp-route-productId="@photo.ProductId">
+                                            Düzenle
+                                        </a>
+                                        @if (!photo.Featured)
+                                        {
+                                    <span>|</span>  <a asp-area="admin" asp-controller="photo" asp-action="delete" asp-route-id="@photo.Id" asp-route-productId="@photo.ProductId" onclick="return confirm('Emin misiniz ?')">Sil</a> 
+
+                                        } 
+
+
+
+
+
+
+                                    </td>
+                        
+                                                        </tr>
+
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- /.box-body -->
+            </div>
+
+
+
+        </div>
+    </div>
+
+</section>
+
+<script>
+    $(function () {
+        
+        $('#photoListTable').dataTable({
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": true,
+            "bAutoWidth": false
+        });
+    });
+</script>
+

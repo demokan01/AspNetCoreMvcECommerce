@@ -79,7 +79,11 @@
                                             </a> |
 
 
-                                            <a asp-area="admin" asp-controller="product" asp-action="delete" asp-route-id="@product.Id" onclick="return confirm('Emin misiniz ?')">Sil</a> <span>|</span>
+                                            <a asp-area="admin" asp-controller="product" asp-action="delete" asp-route-id="@product.Id" onclick="return confirm('Emin misiniz ?')">Sil</a> <span>|</span><a asp-area="admin" asp-controller="photo" asp-action="index" asp-route-id="@product.Id">
+    Resim Listesi
+</a> | <a asp-area="admin" asp-controller="photo" asp-action="add" asp-route-id="@product.Id">
+    Resim Ekle
+</a>
 
 
                                         </td>

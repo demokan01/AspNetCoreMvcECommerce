@@ -1,6 +1,7 @@
 ﻿using AspNetCoreMvcECommerce.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 
 namespace AspNetCoreMvcECommerce.Areas.Admin.Controllers
@@ -48,9 +49,17 @@ namespace AspNetCoreMvcECommerce.Areas.Admin.Controllers
         [Route("delete/{id}")]
         public IActionResult Delete(int id)
         {
+            try 
+            { 
             var category = db.Categories.Find(id);
             db.Categories.Remove(category);
             db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+                TempData["error"] = e.Message;
+            }
             return RedirectToAction("Index", "category", new { area = "admin" });
         }
 
