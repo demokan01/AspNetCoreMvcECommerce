@@ -12,6 +12,19 @@
 
 </section>
 <section class="content">
+    @if (TempData["error"] != null)
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="alert alert-danger alert-dismissable">
+
+                    <h4><i class="icon fa fa-ban"></i> Başarısız</h4>
+                    Silme İşlemi Başarısız
+                </div>
+            </div>
+        </div>
+    }
+
     <div class="row">
         <div class="col-xs-12">
 
@@ -30,7 +43,7 @@
                                     <th>Photo</th>
                                     <th>Fiyat</th>
                                     <th>Kategori</th>
-                                    
+
                                     <th>Eylem</th>
 
                                 </tr>
@@ -53,25 +66,25 @@
                                 {
                                     Product pr = (Product)product;
                                     var photo = pr.Photos.SingleOrDefault(p => p.Featured == true);
-                                <tr class="odd">
-                                    <td class="  sorting_1">@product.Id</td>
-                                    <td class=" "><b>@product.Name</b></td>
-                                    <td class=" "><img src="~/products/@photo.Name" width="100" /></td>
-                                    <td class=" ">@product.Price</td>
-                                    <td class=" ">@(product.Status ? "Göster":"Gizle")</td>
-                                    <td class=" ">@(product.Category.Name)</td>
-                                    <td class=" ">
-                                        <a asp-area="admin" asp-controller="product" asp-action="edit" asp-route-id="@product.Id">
-                                            Düzenle
-                                        </a> |
+                                    <tr class="odd">
+                                        <td class="  sorting_1">@product.Id</td>
+                                        <td class=" "><b>@product.Name</b></td>
+                                        <td class=" "><img src="~/products/@photo.Name" width="100" /></td>
+                                        <td class=" ">@product.Price</td>
+                                        <td class=" ">@(product.Status ? "Göster":"Gizle")</td>
+                                        <td class=" ">@(product.Category.Name)</td>
+                                        <td class=" ">
+                                            <a asp-area="admin" asp-controller="product" asp-action="edit" asp-route-id="@product.Id">
+                                                Düzenle
+                                            </a> |
 
 
-                                        <a asp-area="admin" asp-controller="product" asp-action="delete" asp-route-id="@product.Id" onclick="return confirm('Emin misiniz ?')">Sil</a> <span>|</span>
+                                            <a asp-area="admin" asp-controller="product" asp-action="delete" asp-route-id="@product.Id" onclick="return confirm('Emin misiniz ?')">Sil</a> <span>|</span>
 
 
-                                    </td>
-                                </tr>
-                                    
+                                        </td>
+                                    </tr>
+
                                 }
 
 

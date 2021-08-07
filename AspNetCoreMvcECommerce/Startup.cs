@@ -36,10 +36,12 @@ namespace AspNetCoreMvcECommerce
                     options.AccessDeniedPath = "/admin/account/accessdenied";
                 });
 
+            
+
 
             services.AddSession();
             services.AddMvc();
-
+            services.AddMvc().AddSessionStateTempDataProvider();
             var connection = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connection));
         }
