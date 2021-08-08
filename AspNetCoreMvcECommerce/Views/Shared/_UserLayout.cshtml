@@ -38,12 +38,12 @@
                 <div class="span6">Welcome!<strong> User</strong></div>
                 <div class="span6">
                     <div class="pull-right">
-                        
-                        
+
+
                         <span class="btn btn-mini">TR</span>
-                        
+
                         <span class="btn btn-mini">155.99 ₺</span>
-                        
+
                         <a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.html"><img src="~/user/themes/images/logo.png" alt="Bootsshop" /></a>
+                    <a class="brand" asp-controller="home" asp-action="index"><img src="~/user/themes/images/logo.png" alt="Bootsshop" /></a>
                     @await Component.InvokeAsync("Search")
                     <ul id="topMenu" class="nav pull-right">
                         <li class=""><a href="special_offer.html">Satış Sözleşmesi</a></li>
@@ -95,8 +95,11 @@
         </div>
     </div>
     <!-- Header End====================================================================== -->
-    
-    @await Component.InvokeAsync("SlideShow")
+    @if (ViewBag.isHome != null)
+    {
+        @await Component.InvokeAsync("SlideShow")
+    }
+
 
     <div id="mainBody">
         <div class="container">
@@ -104,24 +107,12 @@
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
                     <div class="well well-small"><a id="myCart" href="product_summary.html"><img src="~/user/themes/images/ico-cart.png" alt="cart">3 Items in your cart  <span class="badge badge-warning pull-right">$155.00</span></a></div>
-                    
+
                     @await Component.InvokeAsync("Category")
-                    
+
                     <br />
-                    <div class="thumbnail">
-                        <img src="~/user/themes/images/products/panasonic.jpg" alt="Bootshop panasonoc New camera" />
-                        <div class="caption">
-                            <h5>Panasonic</h5>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-                        </div>
-                    </div><br />
-                    <div class="thumbnail">
-                        <img src="~/user/themes/images/products/kindle.png" title="Bootshop New Kindel" alt="Bootshop Kindel">
-                        <div class="caption">
-                            <h5>Kindle</h5>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-                        </div>
-                    </div><br />
+                    @await Component.InvokeAsync("LatestProducts")
+                    <br />
                     <div class="thumbnail">
                         <img src="~/user/themes/images/payment_methods.png" title="Bootshop Payment Methods" alt="Payments Methods">
                         <div class="caption">
@@ -168,11 +159,13 @@
                 <div id="socialMedia" class="span3 pull-right">
                     <h5>SOCIAL MEDIA </h5>
                     <a href="#"><img width="60" height="60" src="~/user/themes/images/facebook.png" title="facebook" alt="facebook" /></a>
-                    <a href="#"><img width="60" height="60" src="~/user/themes/images/twitter.png" title="twitter" alt="twitter" /></a>
-                    <a href="#"><img width="60" height="60" src="~/user/themes/images/youtube.png" title="youtube" alt="youtube" /></a>
+                    <a href="#"><img width="60" height="60" src="~/user/themes/images/instagram.png" title="instagram" alt="instagram" /></a>
+                    <a href="#"><img width="60" height="60" src="~/user/themes/images/whatsapp.png" title="whatsapp" alt="whatsapp" /></a>
+                    @*<a href="#"><img width="60" height="60" src="~/user/themes/images/twitter.png" title="twitter" alt="twitter" /></a>
+        <a href="#"><img width="60" height="60" src="~/user/themes/images/youtube.png" title="youtube" alt="youtube" /></a>*@
                 </div>
             </div>
-            <p class="pull-right">&copy; Bootshop</p>
+            <p class="pull-right">&copy; <b>IQOSTOWN.COM</b></p>
         </div><!-- Container End -->
     </div>
     <!-- Placed at the end of the document so the pages load faster ============================================= -->
@@ -237,7 +230,7 @@
             </div>
         </div>
     </div>
-    
+
     <script type="text/javascript">
         (function () {
             var options = {
