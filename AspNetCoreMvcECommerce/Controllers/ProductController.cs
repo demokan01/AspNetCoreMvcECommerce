@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace AspNetCoreMvcECommerce.Controllers
 {
@@ -27,6 +28,17 @@ namespace AspNetCoreMvcECommerce.Controllers
             ViewBag.ProductImages = product.Photos.Where(p => p.Status).ToList();
             ViewBag.RelatedProducts = db.Products.Where(p => p.CategoryId == product.CategoryId && p.Id != id && p.Status).ToList();
             return View("Details");
+        }
+
+        [Route("category/{id}")]
+        public IActionResult Category(int id,int? page)
+        {
+            var pageNumber = page ?? 1;
+            var category = db.Categories.Find(id);
+            ViewBag.Category = category;
+            ViewBag.CountProducts = category.Products.Count(p => p.Status);
+            ViewBag.Products = category.Products.Where(p => p.Status).ToList().ToPagedList(pageNumber,9);
+            return View("Category");
         }
     }
 }
