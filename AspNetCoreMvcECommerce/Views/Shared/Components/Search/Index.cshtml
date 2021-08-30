@@ -3,30 +3,30 @@
     Layout = null;
 }
 
-<form class="form-inline navbar-search" method="post" action="products.html">
-    <input id="srchFld" class="srchTxt" type="text" />
-    <select class="srchTxt">
-        @foreach (var category in Model)
+<form class="form-inline navbar-search" method="get" asp-controller="product" asp-action="search">
+    <input id="srchFld" class="srchTxt" type="text" name="keyword" value="@Model.keyword" />
+    <select class="srchTxt" name="categoryId">
+        @foreach (var category in Model.categories)
         {
-            @if(category.InverseParents != null && category.InverseParents.Count > 0)
+            @if (category.InverseParents != null && category.InverseParents.Count > 0)
             {
         <optgroup label="@category.Name">
             @foreach (var subCategory in category.InverseParents)
             {
                 @if (subCategory.Status)
                 {
-                    @*<option value="@subCategory.Id">@subCategory.Name</option>*@
-                    <li><a href=""><i class="icon-chevron-right"></i>@subCategory.Name</a></li>
+                    <option value="@subCategory.Id" selected="@(subCategory.Id == Model.categoryId ? "selected" : "")">@subCategory.Name</option>
+                    @*<li><a href=""><i class="icon-chevron-right"></i>@subCategory.Name</a></li>*@
                 }
 
             }
         </optgroup>
+                }
+                else
+                {
+                    <option value = "@category.Id" selected="@(category.Id == Model.categoryId ? "selected" : "")">@category.Name</option>
+                }
             }
-            else
-            {
-                <option value="@category.Id">@category.Name</option>
-            }
-        }
         
         
     </select>

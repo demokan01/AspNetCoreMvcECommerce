@@ -40,5 +40,19 @@ namespace AspNetCoreMvcECommerce.Controllers
             ViewBag.Products = category.Products.Where(p => p.Status).ToList().ToPagedList(pageNumber,9);
             return View("Category");
         }
+
+
+        [HttpGet]
+        [Route("search")]
+        public IActionResult Search(string keyword,int categoryId,int? page)
+        {
+            var pageNumber = page ?? 1;
+            var products = db.Products.Where(p => p.Name.Contains(keyword) && p.CategoryId==categoryId && p.Status).ToList();
+            ViewBag.Keyword = keyword;
+            ViewBag.categoryId = categoryId;
+            ViewBag.CountProducts = products.Count;
+            ViewBag.Products = products.ToPagedList(pageNumber,9);
+            return View("Search");
+        }
     }
 }
