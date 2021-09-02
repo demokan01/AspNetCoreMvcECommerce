@@ -1,4 +1,7 @@
-﻿
+﻿@using System.Security.Claims;
+@{
+    var user = User.FindFirst(ClaimTypes.Name);
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +38,12 @@
     <div id="header">
         <div class="container">
             <div id="welcomeLine" class="row">
-                <div class="span6">Welcome!<strong> User</strong></div>
+                <div class="span6">
+                    Hoşgeldiniz.. @if (user!=null)
+                    {
+                        <strong> @user.Value</strong>
+                    }
+                </div>
                 <div class="span6">
                     <div class="pull-right">
 
@@ -58,10 +66,14 @@
                 <div class="navbar-inner">
                     <a class="brand" asp-controller="home" asp-action="index"><img src="~/user/themes/images/logo2.png" alt="Bootsshop" /></a>
                     @await Component.InvokeAsync("Search")
-                    <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="special_offer.html">Satış Sözleşmesi</a></li>
-                        <li class=""><a href="normal.html">Delivery</a></li>
-                        <li class=""><a href="contact.html">İletişim</a></li>
+                <ul id="topMenu" class="nav pull-right">
+                    
+                    
+                    <li class=""><a href="contact.html">İletişim</a></li>
+                    @if (@user == null)
+                    {
+
+
                         <li class="">
                             <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Giriş</span></a>
                             <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
@@ -70,25 +82,29 @@
                                     <h3>Giriş Sayfası</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
+                                    <form class="form-horizontal loginFrm" asp-controller="customer" asp-action="login" method="post">
                                         <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Kullanıcı Adı">
+                                            <input type="text" id="inputEmail" placeholder="Kullanıcı Adı" name="username" required="required">
                                         </div>
                                         <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Şifre">
+                                            <input type="password" id="inputPassword" placeholder="Şifre" name="password" required="required">
                                         </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-                                                <input type="checkbox"> Beni Hatırla
-                                            </label>
-                                        </div>
+
+
+                                        <button type="submit" class="btn btn-success">Giriş</button>
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Çıkış</button>
+                                        <a asp-controller="customer" asp-action="register"><button type="submit" class="btn btn-primary">Kayıt Ol</button></a>
                                     </form>
-                                    <button type="submit" class="btn btn-success">Giriş</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                    <button type="submit" class="btn btn-primary">Kayıt Ol</button>
                                 </div>
                             </div>
                         </li>
+                    }
+                    else
+                    {
+                        <li class=""><a asp-controller="customer" asp-action="logout">Çıkış</a></li>
+                        <li class="">
+                            <a asp-controller="customer" asp-action="profile" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Profilim</span></a></li>
+                            }
                     </ul>
                 </div>
             </div>
@@ -162,7 +178,7 @@
                     <a href="#"><img width="60" height="60" src="~/user/themes/images/instagram.png" title="instagram" alt="instagram" /></a>
                     <a href="#"><img width="60" height="60" src="~/user/themes/images/whatsapp.png" title="whatsapp" alt="whatsapp" /></a>
                     @*<a href="#"><img width="60" height="60" src="~/user/themes/images/twitter.png" title="twitter" alt="twitter" /></a>
-        <a href="#"><img width="60" height="60" src="~/user/themes/images/youtube.png" title="youtube" alt="youtube" /></a>*@
+                        <a href="#"><img width="60" height="60" src="~/user/themes/images/youtube.png" title="youtube" alt="youtube" /></a>*@
                 </div>
             </div>
             <p class="pull-right">&copy; <b>IQOSTOWN.COM</b></p>

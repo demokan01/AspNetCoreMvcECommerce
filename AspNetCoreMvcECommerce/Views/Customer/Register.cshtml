@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@model AspNetCoreMvcECommerce.Models.Account
+
+
+<div class="span9">
+    <ul class="breadcrumb">
+        <li><a asp-controller="home" asp-action="index" >Anasayfa</a> <span class="divider">/</span></li>
+        <li class="active">Kayıt Ol</li>
+    </ul>
+    <h3> Üye Kayıt Sayfası</h3>
+    <div class="well">
+
+        @if (ViewBag.error != null)
+        {
+            <div class="alert alert-error">
+                <p>
+                    @ViewBag.error
+                </p>
+            </div>
+        }
+        <!--
+        <div class="alert alert-info fade in">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+         </div>
+        <div class="alert fade in">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+         </div>
+         <div class="alert alert-block alert-error fade in">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+         </div> -->
+        <form class="form-horizontal" asp-controller="customer" asp-action="register" method="post">
+
+
+            <h4>Bilgileri Giriniz</h4>
+            <div class="control-group">
+                <label class="control-label" for="username">Kullanıcı Adı <sup>*</sup></label>
+                <div class="controls">
+                    <input id="username" type="text" placeholder="Kullanıcı Adı" required="required" asp-for="Username">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="password">Şifre <sup>*</sup></label>
+                <div class="controls">
+                    <input type="password" id="password" placeholder="Şifre" required="required" asp-for="Password">
+                </div>
+            </div>
+
+            
+
+            <div class="control-group">
+                <label class="control-label" for="fullname">Ad Soyad<sup>*</sup></label>
+                <div class="controls">
+                    <input type="text" id="fullname" placeholder="Ad Soyad" asp-for="FullName"> 
+                </div>
+            </div>
+
+            
+            
+            <div class="control-group">
+                <label class="control-label" for="email">Email<sup>*</sup></label>
+                <div class="controls">
+                    <input type="email" id="email" placeholder="Email" asp-for="Email">
+                </div>
+            </div>
+
+            @*<div class="control-group">
+                <label class="control-label" for="mobile">Cep Telefonu</label>
+                <div class="controls">
+                    <input type="text" name="mobile" id="mobile" placeholder="Cep Telefonu">
+                </div>
+            </div>*@
+
+            <p><sup>*</sup> İşaretli Yerleri Doldurunuz...	</p>
+
+            <div class="control-group">
+                <div class="controls">
+                    
+                    <input class="btn btn-large btn-success" type="submit" value="Kayıt Ol">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
